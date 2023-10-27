@@ -1,0 +1,285 @@
+[General]
+# Update-2023.09.26.12.17
+# https://raw.githubusercontent.com/TributePaulWalker/Profiles/main/Surge/Surge%20Pro.conf
+# > 增强版 Wi-Fi 助理
+# 在 Wi-Fi 网络不佳时尝试使用数据网络建立连接，请仅当使用不限量的数据流量时开启，默认开启。
+wifi-assist = true
+# 混合网络，默认关闭。
+all-hybrid = false
+# > Internet 测试 URL
+internet-test-url = http://wifi.vivo.com.cn/generate_204
+# > 代理测速 URL
+proxy-test-url = http://cp.cloudflare.com/generate_204
+# > 测试超时（秒）
+test-timeout = 5
+# > 自定义 GeoIP 数据库
+geoip-maxmind-url = https://github.com/Masaiki/GeoIP2-CN/raw/release/Country.mmdb
+# > GeoIP 数据库自动更新
+disable-geoip-db-auto-update = false
+# > VIF Excluded Routes
+# Surge VIF 只能处理 TCP 和 UDP 协议。使用此选项可以绕过特定的 IP 范围，允许所有流量通过。
+# tun-excluded-routes = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
+# > VIF Included Routes
+# 默认情况下，Surge VIF 接口会声明自己是默认路由。但是，由于 Wi-Fi 接口的路由较小，有些流量可能不会通过 Surge VIF 接口。使用此选项可以添加一条较小的路由。
+# tun-included-routes = 192.168.1.12/32
+# > UDP IP 防泄漏
+# 如果没有代理服务器支持 UDP 转发，可修改为「 direct 」或注释下条，但需注意同一目标主机名 TCP 请求与 UDP 请求的源地址不同所造成的隐私及安全风险。
+udp-policy-not-supported-behaviour = reject
+# > 隐藏状态栏上的 VPN 图标
+# 启动该选项可能导致 「Cannot allocate memory」系统错误，请谨慎使用。
+# hide-vpn-icon = true
+# > 提高处理 UDP 流量优先级
+udp-priority = true
+# > IPv6 支持 (默认关闭）
+ipv6 = false
+# > IPv6 VIF (默认禁用）
+ipv6-vif = disabled
+# > 允许 Wi-Fi 访问 (仅 iOS ）
+allow-wifi-access = true
+wifi-access-http-port = 6152
+wifi-access-socks5-port = 6153
+# > Allow Hotspot Access (热点分享代理）
+allow-hotspot-access = true
+# > HTTP-API
+# 依次为：密码，主机名，端口
+http-api = Brian@0.0.0.0:6171
+# > HTTP-API-TLS
+http-api-tls = false
+# > Web控制器
+# Safari输入127.0.0.1:6171,填入HTTP-API密码即可。
+http-api-web-dashboard = true
+# > 兼容模式 (仅 iOS)
+# compatibility-mode = 0
+# > 跳过代理
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, iosapps.itunes.apple.com, seed-sequoia.siri.apple.com, sequoia.apple.com
+# > 排除简单主机名
+exclude-simple-hostnames = true
+# > DNS 服务器
+dns-server = 119.29.29.29, 223.5.5.5
+# > 加密的DNS服务器 (如无必要不建议使用)
+doh-skip-cert-verification = false
+# > 关闭 DOH 的服务端证书验证
+encrypted-dns-follow-outbound-mode = false
+# 使加密 DNS 请求通过代理策略执行
+read-etc-hosts = true
+# > 从 /etc/hosts 读取 DNS 记录
+loglevel = notify
+# > 日志级别
+show-error-page-for-reject = true
+# > 当遇到 REJECT 策略时返回错误页
+always-real-ip = *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.logon.battlenet.com.cn, *.logon.battle.net, stun.l.google.com
+# > Always Real IP Hosts
+include-all-networks = false
+# > Hijack DNS
+# hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+# > 路由防火墙
+# 包含所有的网络请求
+include-local-networks = false
+# > 包含本地网络请求
+use-local-host-item-for-proxy = false
+# > 代理请求本地 DNS 映射
+include-apns = false
+# > 新增两个参数（需要 iOS 16.4 以上版本）
+# 请注意，这两个选项仅应在有特殊需求时开启。正常情况下不应该开启以避免产生问题。
+# > 让 Surge 接管 Apple Push Notification service (APNs) 相关请求
+include-cellular-services = false
+# > 让 Surge 接管 VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail 等相关数据网络服务的请求
+
+[Ponte]
+# > 通过代理使用 Ponte
+client-proxy-name = Proxy
+
+[Proxy]
+Direct = direct
+Reject = reject
+WARP = wireguard, section-name=Cloudflare, underlying-proxy=Proxy, test-url=http://cp.cloudflare.com/generate_204
+
+[Proxy Group]
+# 机场信息 (encode地址链接: https://www.urlencoder.org）
+Substore = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
+Proxy = select, DIRECT, Substore, HK, TW, JP, SG, US, WARP, no-alert=0, hidden=0, include-all-proxies=0
+Apple = select, Proxy, Direct, HK, TW, JP, SG, US, no-alert=0, hidden=0, include-all-proxies=0
+# 国内用户建议直连。
+YouTube = select, Proxy, HK, TW, JP, SG, US, no-alert=0, hidden=0, include-all-proxies=0
+Telegram = select, Proxy, HK, SG, US, no-alert=0, hidden=0, include-all-proxies=0
+Spotify = select, Proxy, DIRECT, HK, TW, JP, SG, US, no-alert=0, hidden=0, include-all-proxies=0
+Streaming = select, Proxy, HK, TW, JP, SG, US, no-alert=0, hidden=0, include-all-proxies=0
+HK = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, interval=600, tolerance=50, update-interval=86400, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), hidden=false
+TW = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, interval=600, tolerance=50, update-interval=86400, policy-regex-filter=(🇨🇳)|(台)|(Tai)|(TW), hidden=false
+JP = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, interval=600, tolerance=50, update-interval=86400, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), hidden=false
+SG = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, interval=600, tolerance=50, update-interval=86400, policy-regex-filter=(🇸🇬)|(新)|(Singapore)|(SG), hidden=0, no-alert=0, include-all-proxies=0
+US = url-test, policy-path=https://sub.store/download/collection/%E5%A5%88%E9%9B%AA%E4%B8%89%E5%88%86?target=Surge, interval=600, tolerance=50, update-interval=86400, policy-regex-filter=(🇺🇸)|(美)|(States)|(US), hidden=0, no-alert=0, include-all-proxies=0
+
+[Rule]
+#小红书
+DOMAIN,fe-static.xhscdn.com,REJECT,extended-matching
+RULE-SET,http://script.hub/file/_start_/https://raw.githubusercontent.com/LeLeBay/Ruleset/main/bilibiIX.list/_end_/bilibiIX.list?type=rule-set&target=surge-rule-set,REJECT
+# 抖音
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/DouYin/DouYin.list,DIRECT
+# WARP
+RULE-SET,https://raw.githubusercontent.com/ExaAlice/Alice/main/Rule/WARP.list,WARP
+# Google
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Proxy
+# 阻止所有 UDP 流量进入443端口，使 HTTP3 请求回落到 TCP 流量。
+AND,((PROTOCOL,UDP), (DEST-PORT,443)),REJECT-NO-DROP
+# 屏蔽 YouTube 的 UDP
+AND,((PROTOCOL,UDP), (DOMAIN-SUFFIX,googlevideo.com)),REJECT-NO-DROP
+# Safari 访问防跳转 App
+DOMAIN,app-site-association.cdn-apple.com,Reject
+# 绕过 App 企业证书过期
+DOMAIN,ocsp.apple.com,Reject
+# Boxjs 代理
+DOMAIN-KEYWORD,jsdelivr.net,Proxy
+# Sub-Store 的 Web 页面
+DOMAIN-SUFFIX,vercel.app,Proxy
+# TestFlight 商店
+DOMAIN,beta.apple.com,DIRECT
+DOMAIN,testflight.apple.com,DIRECT
+# 后续规则修正
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Unbreak.list,Direct
+# 广告拦截
+DOMAIN-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/AdvertisingPlus.list,Reject
+DOMAIN-SET,https://anti-ad.net/surge2.txt,Reject
+# 隐私保护
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Privacy.list,Reject
+# 运营商劫持或恶意网站
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Hijacking.list,Reject
+# 腾讯 WeChat ASN
+IP-ASN,132203,Direct
+# 腾讯 WeChat
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Extra/WeChat.list,Direct
+RULE-SET,https://raw.githubusercontent.com/NobyDa/Script/master/Surge/WeChat.list,Direct
+# Apple 服务
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Extra/Apple/Apple.list,Apple
+# YouTube
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,YouTube
+# Spotify
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Music/Spotify.list,Spotify
+# 国际流媒体服务
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/Streaming.list,Streaming
+# Telegram 服务
+RULE-SET,https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/main/ruleset/ASN.Telegram.list,Telegram
+# 全球加速
+RULE-SET,https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Global.list,Proxy
+# 中国直连
+RULE-SET,SYSTEM,REJECT
+RULE-SET,https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/auto-update/ruleset/ASN.China.list,DIRECT
+# 防止应用循环请求
+IP-CIDR,0.0.0.0/32,Reject,no-resolve
+# Local Area Network 局域网
+RULE-SET,LAN,Direct
+# GeoIP China
+GEOIP,CN,Direct
+FINAL,Proxy,dns-failed
+
+[Host]
+# Firebase Cloud Messaging
+mtalk.google.com = 108.177.125.188
+# Google Dl
+dl.google.com = server:119.29.29.29
+dl.l.google.com = server:119.29.29.29
+update.googleapis.com = server:119.29.29.29
+# PlayStation
+*.dl.playstation.net = server:119.29.29.29
+# Router Admin Panel
+amplifi.lan = server:syslib // Ubiquiti Amplifi Router
+router.synology.com = server:syslib // Synology Router
+sila.razer.com = server:syslib // Razer Sila Router
+router.asus.com = server:syslib // Asus Router
+routerlogin.net = server:syslib // Netgear Router
+orbilogin.com = server:syslib // Netgear Obri Router
+www.LinksysSmartWiFi.com = server:syslib // Linksys Router
+LinksysSmartWiFi.com = server:syslib // Linksys Router
+myrouter.local = server:syslib // Linksys Router
+www.miwifi.com = server:syslib // Xiaomi Mi WiFi Router
+miwifi.com = server:syslib // Xiaomi Mi WiFi Router
+mediarouter.home = server:syslib // Huawei Router
+tplogin.cn = server:syslib // TP-Link Router
+tplinklogin.net = server:syslib // TP-Link Router
+melogin.cn = server:syslib // MERCURY Router
+falogin.cn = server:syslib // FAST Router
+# Apple
+apple.com = server:223.5.5.5
+*icloud.com = server:223.5.5.5
+*icloud.com.cn = server:223.5.5.5
+*testflight.apple.com = server:8.8.4.4
+
+[URL Rewrite]
+"(?=xhscdn.*\.(otf|OTF|ttf|TTF|zip)) " - reject
+# Safari 全能搜索 header
+# 以下为 Safari 全能搜索、需要把 Safari 的搜索引擎设置为: DuckDuckGo
+# gm (Google图片) header
+^https:\/\/duckduckgo.com\/\?q=gm\+([^&]+).+ https://www.google.com/search?&tbm=isch&q=$1 302
+# gh (GitHub) header
+^https:\/\/duckduckgo.com\/\?q=gh\+([^&]+).+ https://github.com/search?q=$1 302
+# tf (Google 搜索 TestFlight)
+^https:\/\/duckduckgo.com\/\?q=tf(\+|%20)([^&]+).+ https://www.google.com/search?as_q=$2&as_sitesearch=testflight.apple.com 302
+# wx (微信) header
+^https:\/\/duckduckgo.com\/\?q=wx\+([^&]+).+ https://weixin.sogou.com/weixinwap?query=$1 302
+# jd (京东) header
+^https:\/\/duckduckgo.com\/\?q=jd\+([^&]+).+ https://so.m.jd.com/ware/search.action?keyword=$1 302
+# tb (淘宝) header
+^https:\/\/duckduckgo.com\/\?q=tb\+([^&]+).+ https://s.m.taobao.com/h5?q=$1 302
+# tm (天猫) header
+^https:\/\/duckduckgo.com\/\?q=tm\+([^&]+).+ https://s.m.tmall.com/m/search.htm?q=$1 302
+# ytb (YouTube) header
+^https:\/\/duckduckgo.com\/\?q=ytb\+([^&]+).+ https://www.youtube.com/results?search_query=$1 302
+# ph (PornHub) header
+^https:\/\/duckduckgo.com\/\?q=ph\+([^&]+).+ https://cn.pornhub.com/video/search?search=$1 302
+# db (豆瓣） header
+^https:\/\/duckduckgo.com\/\?q=db\+([^&]+).+ https://m.douban.com/search/?query=$1 302
+# bi (必应) header
+^https:\/\/duckduckgo.com\/\?q=bi\+([^&]+).+ https://cn.bing.com/search?q=$1 302
+# bd (百度) header
+^https:\/\/duckduckgo.com\/\?q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 302
+# ccn (App Store 临时换至中国区)
+^https:\/\/duckduckgo.com\/\?q=ccn&.+ https://itunes.apple.com/WebObjects/MZStore.woa/wa/resetAndRedirect?dsf=143465&mt=8&url=/WebObjects/MZStore.woa/wa/viewSoftware?mt=8&id=1108187390&cc=cn&urlDesc= 302
+# uus (App Store 临时换至美国区)
+^https:\/\/duckduckgo.com\/\?q=uus&.+ https://itunes.apple.com/WebObjects/MZStore.woa/wa/resetAndRedirect?dsf=143441&mt=8&url=/WebObjects/MZStore.woa/wa/viewSoftware?mt=8&id=1108187390&cc=us&urlDesc= 302
+# hhk (App Store 临时换至香港区)
+^https:\/\/duckduckgo.com\/\?q=hhk&.+ https://itunes.apple.com/WebObjects/MZStore.woa/wa/resetAndRedirect?dsf=143463&mt=8&url=/WebObjects/MZStore.woa/wa/viewSoftware?mt=8&id=1108187390&cc=hk&urlDesc= 302
+# ddg (DuckDuckGo) header
+^https:\/\/duckduckgo.com\/\?q=ddg\+([^&]+).+ https://duckduckgo.com/?ia=about&q=$1 302
+# 无指令 (Google) header
+^https:\/\/duckduckgo.com\/\?q=([^&]+).+ https://www.google.com/search?q=$1 302
+# 阻止 google.com 跳转到 google.com.hk
+^https?:\/\/(www\.)?g\.cn https://www.google.com/ncr 302
+^https?:\/\/(www\.)?google\.cn https://www.google.com/ncr 302
+
+[Header Rewrite]
+# 百度 (全站替换为手机百度 Quark 的 User-Agent）
+http-request ^https?:\/\/(?!d\.pcs).*(?<!map)\.baidu\.com header-replace-regex User-Agent .+iPhone.+ "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/16C50 Quark/604.1 T7/10.3 SearchCraft/2.6.3 (Baidu; P1 8.0.0)"
+# 知乎 (部分替换为手机百度 Quark 的 User-Agent）
+http-request ^https?:\/\/www\.zhihu\.com header-replace-regex User-Agent .+iPhone.+ "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/16C50 Quark/604.1 T7/10.3 SearchCraft/2.6.3 (Baidu; P1 8.0.0)"
+
+[Map Local]
+# 中国移动开屏 client.app.coc.10086.cn
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//reject-200.txt"
+
+[MITM]
+# 跳过服务端证书验证
+skip-server-cert-verify = true
+# 用于 TCP 连接
+h2 = true
+# MITM over HTTP/2
+hostname = *.xhscdn.com, duckduckgo.com, *.google.cn, *.google.com.hk, sub.store, boxer.baidu.com, api.weibo.cn, mapi.weibo.com, *.uve.weibo.com, security.wechat.com, weixin110.qq.com, testflight.apple.com, pan.baidu.com, m.douban.com, h5.xiuxiu.meitu.com, api.xiuxiu.meitu.com, *.baidu.com, www.zhihu.com
+ca-passphrase = 0F5C37F6
+ca-p12 = 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
+
+[Script]
+Sub-Store Core = type=http-request,pattern=^https?:\/\/sub\.store\/((download)|api\/(preview|sync|(utils\/node-info))),script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-1.min.js,requires-body=1,timeout=120,ability=http-client-policy,max-size=0,script-update-interval=0
+Sub-Store Simple = type=http-request,pattern=^https?:\/\/sub\.store,script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-0.min.js,requires-body=1,max-size=0,script-update-interval=0
+机场信息 = type=http-request,timeout=10,pattern=http://sub\.info,script-path=https://raw.githubusercontent.com/TributePaulWalker/Profiles/main/JavaScript/Surge/Sub_info_lite.js,requires-body=0,script-update-interval=0
+百度搜索防跳转 = type=http-response,pattern=^https?\:\/\/boxer\.baidu\.com\/scheme,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/baidu-no-redirect.js
+解除微信链接限制 = type=http-response,pattern=^https\:\/\/(weixin110\.qq|security.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/UnblockURLinWeChat.js,script-update-interval=0
+# Spotify歌词翻译
+spotify歌词翻译 = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-lyric.js,argument=appid=20230809001774891&securityKey=o0YqVFLS7JTy_j1fwQp4,script-update-interval=0
+
+[WireGuard Cloudflare]
+private-key = 4HHX9Ehk35vvCjG8Dg3+bA9wxq6qPO2uQ5j00ZSIYXo=
+self-ip = 172.16.0.2
+self-ip-v6 = 2606:4700:110:84b2:fd66:1fa8:43b9:6b69
+dns-server = 1.1.1.1, 2606:4700:4700::1111
+mtu = 1280
+peer = (public-key = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, allowed-ips = "0.0.0.0/0, ::0/0", endpoint = 162.159.193.5:2408, keepalive = 45, client-id = 249/141/197)
+
