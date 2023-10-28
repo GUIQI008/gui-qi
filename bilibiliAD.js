@@ -1,3 +1,6 @@
+// ==UserScript==
+// @ScriptName        哔哩哔哩净化
+
 hostname = -broadcast.chat.bilibili.com, -*cdn*.biliapi.net, -*tracker*.biliapi.net, app.bilibili.com, api.live.bilibili.com, *.bilibili.com, *.bilibili.*, grpc.biliapi.net,*biliapi.net,aisubtitle.hdslb.com,i0.hdslb.com
 
 
