@@ -27,7 +27,7 @@ hostname = -broadcast.chat.bilibili.com, -*cdn*.biliapi.net, -*tracker*.biliapi.
 ^https?:\/\/app\.bilibili\.com\/x\/resource\/ip url reject
 # ～ BiliBili_哔哩哔哩_应用开屏去广告
 ^https://app.bilibili.com/x/v2/splash/show url reject-dict
-# ～ BiliBili_哔哩哔哩_应用开屏广告预加载@yjqiang
+# ～ BiliBili_哔哩哔哩_应用开屏广告预加载
 ^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/list url script-response-body https://github.com/ddgksf2013/Scripts/raw/master/bilibili_json.js
 # ～ BiliBili_哔哩哔哩_1080P高码率+4K画质[番剧和影视除外]
 ^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? url script-response-body https://github.com/ddgksf2013/Scripts/raw/master/bilibili_json.js
