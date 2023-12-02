@@ -1,5 +1,0 @@
-#屏蔽抖音商店 需要清除抖音缓存
-host-suffix, byteeffecttos.com, reject 
-host-suffix, bytegecko.com, reject
-host-suffix, ecombdimg.com, reject 
-host-suffix, ecombdapi.com, reject
