@@ -7,7 +7,7 @@
 
 hostname = %APPEND%
 r6.mo.baidu.com,res.mi.baidu.com,mime.baidu.com,103.91.210.141,open.e.kuaishou.com,access.mypikpak.com,pzoap.moedot.net,
-cloud.189.cn,api.coolapk.com,mbd.baidu.com,img.meituan.net,pd.meituan.net,s3plus.meituan.net,wmapi.meituan.com,mp.weixin.qq.com,interface3.music.163.com,www.icourse163.org,god.gameyw.netease.com, ok.166.net,ok.166.net,cds.wifi188.com,images.client.vip.xunlei.com,api-shoulei-ssl.xunlei.com,gw.alicdn.com,heic.alicdn.com,asp.cntv.myalicdn.com,client.app.coc.10086.cn,mcmm.caiyun.feixin.10086.cn,youtubei.googleapis.com,weixin110.qqsecurity.wechat.com,api-access.pangolin-sdk-toutiao.com,api.m.jd.com
+cloud.189.cn,api.coolapk.com,mbd.baidu.com,img.meituan.net,pd.meituan.net,s3plus.meituan.net,wmapi.meituan.com,mp.weixin.qq.com,interface3.music.163.com,www.icourse163.org,god.gameyw.netease.com,ok.166.net,cds.wifi188.com,images.client.vip.xunlei.com,api-shoulei-ssl.xunlei.com,gw.alicdn.com,heic.alicdn.com,asp.cntv.myalicdn.com,client.app.coc.10086.cn,mcmm.caiyun.feixin.10086.cn,youtubei.googleapis.com,weixin110.qqsecurity.wechat.com,api-access.pangolin-sdk-toutiao.com,api.m.jd.com
 [URL Rewrite]
 
 # > 百度输入法
