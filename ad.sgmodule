@@ -4,18 +4,12 @@
 
 [MITM]
 
-hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,,103.91.210.141,cds.wifi188.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,app.10086.cn,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,youtubei.googleapis.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com, member.alipan.com
+hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,youtubei.googleapis.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com, member.alipan.com
 
 [URL Rewrite]
 
 # hostname = list-app-m.i4.cn
 ^https?:\/\/list-app-m\.i4\.cn\/getopfstadinfo\.xhtml - reject
-# > 百度输入法
-^http:\/\/r6\.mo\.baidu\.com\/res\/file/advertisement\/files\/.+\.jpg - reject
-^http:\/\/res\.mi\.baidu\.com\/imeres\/ime-res\/advertisement\/files\/.+\.jpg - reject
-^https:\/\/mime\.baidu\.com\/v5\/activity\/advertisementnonrealtime - reject
-^https:\/\/mime\.baidu\.com\/v5\/start_screen_ads\/list - reject
-^https:\/\/mime\.baidu\.com\/v5\/hotpatch\/check\?hotpatch - reject
 # > 快手
 ^https:\/\/open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$ - reject
 # > omofun
@@ -33,26 +27,8 @@ https://access.mypikpak.com/access_controller/v1/area_accessible - reject
 
 ^https:\/\/member\.alipan\.com\/v2\/activity\/sign_in_luckyBottle data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
 
-# 百度输入法开屏
-^https?:\/\/mime\.baidu\.com\/v5\/start_screen_ads/list data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-# 应用内灵感语录 输入页面推荐里语录
-^https?:\/\/mime\.baidu\.com\/sapi\/v1\/lccorpus\/(applist|pannellist) data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-# 输入法点击图标
-^https?:\/\/mime\.baidu\.com\/sapi\/v1\/circle\/joinedlist data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-^https?:\/\/mime\.baidu\.com\/commer\/pocket_api\/enterprise_list data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-^https?:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\?appname=baidu_input data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
 # hostname = api.coolapk.com
 ^https?:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-# > 美团外卖
-^http:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\? data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-
-^https?:\/\/img\.meituan\.net\/bizad\/.*.jpg data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
 
 # 微信公众号去除商品推广
 ^https?:\/\/mp\.weixin\.qq\.com\/mp\/cps_product_info\?action data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
