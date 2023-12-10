@@ -1,0 +1,116 @@
+#!name=广告拦截合集-重写
+#!desc=🔗 [2023/12/10 01:12:49] (R)针对部分APP开屏广告，应用内广告进行拦截，某些APP要清除缓存或者重新安装拦截广告才会生效！
+#!date=2023-12-07 20:06:00
+
+# 🔗 模块链接
+#SUBSCRIBED http://script.hub/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/QuantumultX/rewrite/chongxie.txt/_end_/chongxie.sgmodule?type=qx-rewrite&target=surge-module&del=true
+
+
+[MITM]
+
+hostname = %APPEND% open.e.kuaishou.cn,dns.jd.com,api.m.jd.com,access.mypikpak.com,,103.91.210.141,cds.wifi188.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,app.10086.cn,*.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,youtubei.googleapis.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,acs.m.taobao.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com
+
+[URL Rewrite]
+
+# hostname = list-app-m.i4.cn
+^https?:\/\/list-app-m\.i4\.cn\/getopfstadinfo\.xhtml - reject
+# > 百度输入法
+^http:\/\/r6\.mo\.baidu\.com\/res\/file/advertisement\/files\/.+\.jpg - reject
+^http:\/\/res\.mi\.baidu\.com\/imeres\/ime-res\/advertisement\/files\/.+\.jpg - reject
+^https:\/\/mime\.baidu\.com\/v5\/activity\/advertisementnonrealtime - reject
+^https:\/\/mime\.baidu\.com\/v5\/start_screen_ads\/list - reject
+^https:\/\/mime\.baidu\.com\/v5\/hotpatch\/check\?hotpatch - reject
+# 禁京东DNS解析 感谢@Eula分享
+^https?:\/\/dns\.jd\.com\/ - reject
+# 禁京东直播小窗
+^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getWidgetV1052 - reject
+# > 快手
+^https:\/\/open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$ - reject
+# > omofun
+^https?:\/\/103\.91\.210\.141\:2515\/xgapp\.php\/v2\/top_notice - reject
+# > pikpak
+https://access.mypikpak.com/access_controller/v1/area_accessible - reject
+# > 拼多多
+^https?:\/\/api\.(pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash - reject
+# > 中国电信
+^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
+
+[Map Local]
+
+# 百度输入法开屏
+^https?:\/\/mime\.baidu\.com\/v5\/start_screen_ads/list data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# 应用内灵感语录 输入页面推荐里语录
+^https?:\/\/mime\.baidu\.com\/sapi\/v1\/lccorpus\/(applist|pannellist) data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# 输入法点击图标
+^https?:\/\/mime\.baidu\.com\/sapi\/v1\/circle\/joinedlist data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https?:\/\/mime\.baidu\.com\/commer\/pocket_api\/enterprise_list data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https?:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\?appname=baidu_input data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# hostname = api.coolapk.com
+^https?:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# > 美团外卖
+^http:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\? data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https?:\/\/img\.meituan\.net\/bizad\/.*.jpg data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
+# hostname = acs.m.taobao.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimama\.etao\.config\.query\/.+?etao_advertise data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alimusic\.common\.mobileservice\.startinit data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.etao\.noah\.query\/.+tao_splash data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryadvertise data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.o2o\.ad\.gateway\.get data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.taobao\.idle\.home\.welcome data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.trip\.activity\.querytmsresources data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.(volvo\.secondfloor\.getconfig|wireless\.home\.newface\.awesome\.get) data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# 微信公众号去除商品推广
+^https?:\/\/mp\.weixin\.qq\.com\/mp\/cps_product_info\?action data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+# > 中国移动
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
+# > 中国移动云盘
+^https?:\/\/mcmm\.caiyun\.feixin\.10086\.cn:80\/mcmm\/api\/IAdvert data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
+^https?:\/\/mcmm\.caiyun\.feixin\.10086\.cn:80\/mcmm\/api\/v\d\/getAdverts data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
+^https?:\/\/middle\.yun\.139\.com\/openapi\/cardConfig\/queryCardInfoV3 data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
+^https?:\/\/ad\.mcloud\.139\.com\/advertapi\/adv-filter\/adv-filter\/AdInfoFilter\/getAdInfos data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
+[Script]
+
+# > 快手联盟,优量汇,穿山甲
+adsense = type=http-response, pattern=^https:\/\/(api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads|open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?), script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/adsense.js, requires-body=true, max-size=-1, timeout=60
+
+coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/feed\/(detail|replyList)\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
+
+coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/main\/(dataList|indexV8|init), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
+
+coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/page\/dataList\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
+
+
+# 微信跳过中间界面，支付宝链接、被封禁链接进行通知弹窗跳转，在微信中用快照显示被封禁的链接（可选），在微信中进行强制重定向（可选），群聊 / 扫码均可使用，可选项可在脚本 2、3 行更改，也可在 BoxJs 中更改。
+UnblockURLinWeChat = type=http-response, pattern=^https\:\/\/(weixin110\.qq|security.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\?, script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/UnblockURLinWeChat.js, requires-body=true, max-size=-1, timeout=60
+
+# > YouTube
+youtube.request.beta.proto = type=http-request, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence)\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/YouTube/youtube.request.beta.proto.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=60
+
+youtube.response.beta.proto = type=http-response, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting)\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/YouTube/youtube.response.beta.proto.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=60
+
