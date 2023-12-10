@@ -1,10 +1,6 @@
 #!name=广告拦截合集-重写
-#!desc=🔗 [2023/12/10 01:12:49] (R)针对部分APP开屏广告，应用内广告进行拦截，某些APP要清除缓存或者重新安装拦截广告才会生效！
+#!desc=桂琪自用
 #!date=2023-12-07 20:06:00
-
-# 🔗 模块链接
-#SUBSCRIBED http://script.hub/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/QuantumultX/rewrite/chongxie.txt/_end_/chongxie.sgmodule?type=qx-rewrite&target=surge-module&del=true
-
 
 [MITM]
 
