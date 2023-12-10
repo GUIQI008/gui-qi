@@ -4,7 +4,7 @@
 
 [MITM]
 
-hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,youtubei.googleapis.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com, member.alipan.com
+hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,youtubei.googleapis.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com, member.alipan.com,imeres.baidu.com, mbd.baidu.com, mime.baidu.com, h2tcbox.baidu.com
 
 [URL Rewrite]
 
@@ -45,7 +45,24 @@ https://access.mypikpak.com/access_controller/v1/area_accessible - reject
 
 ^https?:\/\/ad\.mcloud\.139\.com\/advertapi\/adv-filter\/adv-filter\/AdInfoFilter\/getAdInfos data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
 
+# 百度输入法开屏
+^https?:\/\/mime\.baidu\.com\/v5\/start_screen_ads/list data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+# 应用内灵感语录 输入页面推荐里语录
+^https?:\/\/mime\.baidu\.com\/sapi\/v1\/lccorpus\/(applist|pannellist) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/mime.json"
+
+# 输入法点击图标 | 收集和分析用户的输入数据
+^https?:\/\/mime\.baidu\.com\/sapi\/v1\/(circle\/joinedlist|lccorpus\/usercorpussync|aihelpactivity\/aihelpresource) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/mime.json"
+
+^https?:\/\/mime\.baidu\.com\/commer\/pocket_api\/enterprise_list data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/mime.json"
+
+^https?:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\?appname=baidu_input data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/bd.json"
+#^https?:\/\/h2tcbox\.baidu\.com\/ztbox\?action=zubc\&appname=baidu_input data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/bd.json"
+
+# log
+^https:\/\/mime\.baidu\.com\/v5\/(fb\/st\?logtype|(notiv3|cellloc_noti|noti_cloudswitch_noti)\/info) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/mime.json"
+
 [Script]
+
 # 酷安
 coolapk = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/feed\/(detail|replyList)\?, script-path=https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
 
@@ -53,6 +70,7 @@ coolapk = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/main\/(d
 
 coolapk = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/page\/dataList\?, script-path=https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
 
+BDSRF = type=http-response,pattern=^https?:\/\/mime\.baidu\.com\/(imrobot\/v1\/pub\/relation\/get_robot_list|v5\/custom_page\/(layout|getdata)),requires-body=1,max-size=0,script-update-interval=-1,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/bdsrf.js
 
 # 微信跳过中间界面，支付宝链接、被封禁链接进行通知弹窗跳转，在微信中用快照显示被封禁的链接（可选），在微信中进行强制重定向（可选），群聊 / 扫码均可使用，可选项可在脚本 2、3 行更改，也可在 BoxJs 中更改。
 UnblockURLinWeChat = type=http-response, pattern=^https\:\/\/(weixin110\.qq|security.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\?, script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/UnblockURLinWeChat.js, requires-body=true, max-size=-1, timeout=60
