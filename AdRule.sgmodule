@@ -4,7 +4,7 @@
 
 [MITM]
 
-hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com,member.alipan.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,*.googlevideo.com,youtubei.googleapis.com,mrp.mcloud.139.com,app.zhuanzhuan.com,api.m.jd.com,app.zhuanzhuan.com
+hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com,member.alipan.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,*.googlevideo.com,youtubei.googleapis.com,mrp.mcloud.139.com,app.zhuanzhuan.com,app.zhuanzhuan.com,api.m.jd.com
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT-NO-DROP
@@ -116,12 +116,6 @@ youtube.request = type=http-request,pattern=^https:\/\/youtubei\.googleapis\.com
 youtube.response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting)\?,requires-body=1,max-size=-1,binary-body-mode=1,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/dist/youtube.response.beta.js
 
 # > 京东
-myBlockAds = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=start, script-path=https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/myBlockAds.js, requires-body=true, max-size=-1, timeout=60
+# 京东 //api.m.jd.com
+jingdong = type=http-response, pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome), script-path=https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/jingdong.js, requires-body=true, max-size=-1, timeout=60
 
-replaceBody = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=lite_advertising, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/replace-body.js, requires-body=true, max-size=3145728, timeout=30, argument=jdLiteAdvertisingVO->random_body
-
-replaceBody = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=lite_SmartPush, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/replace-body.js, requires-body=true, max-size=3145728, timeout=30, argument=pushData->random_body
-
-jingxiAd = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com\/api\?functionId=delivery_show, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/jingxiAd.js, requires-body=true, max-size=-1, timeout=60
-
-replaceBody = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=(server|basic)Config, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/replace-body.js, requires-body=true, max-size=3145728, timeout=30, argument=dnsvip"\:".+->dnsvip":"
