@@ -8,7 +8,7 @@
 # aliyun.example.com
 # quark.example.com
 # pikpak.example.com
-# Fileball挂载图标：https://raw.githubusercontent.com/githubdulong/Script/master/Images/Fileball.json
+# Fileball挂载图标：https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/Pornhub.png
 
 [General]
 force-http-engine-hosts = %APPEND% *.example.com:0
