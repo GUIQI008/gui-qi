@@ -28,7 +28,7 @@ https://access.mypikpak.com/access_controller/v1/area_accessible - reject
 # > 中国电信
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
 # > 中国移动云盘
-#^https:\/\/mrp\.mcloud\.139\.com\/mc\/mc-client-service\/openapi\/letter\/query - reject
+^https:\/\/mrp\.mcloud\.139\.com\/mc\/mc-client-service\/openapi\/letter\/query - reject
 # > bilibili精简
 (?=resource\?resourceUrl|upos\-sz\-staticcos) - reject
 (?=.*(hdslb\.com.*(\.zip|\.mp4)))^((?!(hdslb\.com\/bfs\/app-static\/)).)*$ - reject
