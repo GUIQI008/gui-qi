@@ -7,7 +7,7 @@ hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wi
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT-NO-DROP
-DOMAIN-SUFFIX,upos-sz-staticcos.bilivideo.com,reject
+DOMAIN,upos-sz-staticcos.bilivideo.com,reject
 [URL Rewrite]
 # 搜图神器
 ^https?:\/\/wallpaper\.soutushenqi\.com\/v\d\/home\/dialog - reject
