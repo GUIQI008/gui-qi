@@ -3,7 +3,7 @@
 #!date=2024-1-13
 
 [MITM]
-hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com,member.alipan.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,app.zhuanzhuan.com,api.m.jd.com,flowplus.meituan.net,img.meituan.net,s3plus.meituan.net,static.yximgs.com
+hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com,member.alipan.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,app.zhuanzhuan.com,api.m.jd.com,flowplus.meituan.net,img.meituan.net,s3plus.meituan.net,static.yximgs.com
 
 [URL Rewrite]
 # 搜图神器
@@ -18,8 +18,6 @@ hostname = %APPEND% open.e.kuaishou.cn,access.mypikpak.com,103.91.210.141,cds.wi
 ^https:\/\/open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$ - reject
 # > omofun
 ^https?:\/\/103\.91\.210\.141\:2515\/xgapp\.php\/v2\/top_notice - reject
-# > pikpak
-https://access.mypikpak.com/access_controller/v1/area_accessible - reject
 # > 拼多多
 ^https?:\/\/api\.(pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash - reject
 # > 中国电信
