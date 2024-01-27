@@ -3,7 +3,7 @@
 #!date=2024-1-27
 
 [MITM]
-hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,client.app.coc.10086.cn,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,mp.weixin.qq.com,m.cloud.189.cn,img.meituan.net,baidu.com,wmapi.meituan.com,api.coolapk.com,weixin110.qq.com,list-app-m.i4.cn,api.alipan.com,member.alipan.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,app.zhuanzhuan.com,flowplus.meituan.net,img.meituan.net,s3plus.meituan.net,static.yximgs.com
+hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,m.cloud.189.cn,weixin110.qq.com,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,app.zhuanzhuan.com,static.yximgs.com
 
 [URL Rewrite]
 # 搜图神器
@@ -11,9 +11,6 @@ hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,client.app
 ^https?:\/\/wallpaper\.soutushenqi\.com\/v\d\/home\/dialog - reject
 # > WIFI万能钥匙APP 首页弹窗广告
 ^http:\/\/cds\.wifi188\.com\/feeds\.sec - reject
-#爱思助手
-# hostname = list-app-m.i4.cn
-^https?:\/\/list-app-m\.i4\.cn\/getopfstadinfo\.xhtml - reject
 # > 快手
 ^https:\/\/open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$ - reject
 # > omofun
@@ -28,13 +25,7 @@ hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,client.app
 ^http?:\/\/app\.95189371\.cn\/ciyuancheng\.php\/v\d\/top_notice\? - reject
 
 [Map Local]
-#酷安
-# hostname = api.coolapk.com
-^https?:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-# 微信公众号去除商品推广
-^https?:\/\/mp\.weixin\.qq\.com\/mp\/cps_product_info\?action data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-# > 中国移动
-^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
+
 # > 中国移动云盘
 ^https?:\/\/mcmm\.caiyun\.feixin\.10086\.cn:80\/mcmm\/api\/IAdvert data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
 ^https?:\/\/mcmm\.caiyun\.feixin\.10086\.cn:80\/mcmm\/api\/v\d\/getAdverts data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
@@ -61,23 +52,15 @@ hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,client.app
 ^https?:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
 # 转转右下角悬浮广告
 ^https?:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/userred\?scene=homePage data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-# 美团 & 美团外卖//flowplus.meituan.net, img.meituan.net, s3plus.meituan.net
-^http:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\?data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
-^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(brandcpt-vedio|waimai-alita)\/\w+\.zip$ data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-dict.json"
+
 [Script]
 #次元城
 AD = type=http-response, pattern=^http?:\/\/app\.95189371\.cn\/ciyuancheng\.php\/v\d\/advert\?position=, script-path=https://raw.githubusercontent.com/eming0802/rules/main/QuantumultX/script/AD.js, requires-body=true, max-size=-1, timeout=60
+
 #转转
 # “我的”页面去除冗余的模块
 zhuanzhuan = type=http-response, pattern=^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhuanzhuan/zhuanzhuan.js, requires-body=true, max-size=-1, timeout=60
 replaceBody = type=http-response, pattern=^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/replace-body.js, requires-body=true, max-size=3145728, timeout=30, argument=infoData->random_body
-# 酷安
-coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/feed\/(detail|replyList)\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
-coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/main\/(dataList|indexV8|init), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
-coolapk = type=http-response, pattern=^https?:\/\/api\.coolapk\.com\/v6\/page\/dataList\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/coolapk.js, requires-body=true, max-size=-1, timeout=60
+
 #百度输入法
 BDSRF = type=http-response,pattern=^https?:\/\/mime\.baidu\.com\/(imrobot\/v1\/pub\/relation\/get_robot_list|v5\/custom_page\/(layout|getdata)),requires-body=1,max-size=0,script-update-interval=-1,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/bdsrf.js
-# 微信跳过中间界面，支付宝链接、被封禁链接进行通知弹窗跳转，在微信中用快照显示被封禁的链接（可选），在微信中进行强制重定向（可选），群聊 / 扫码均可使用，可选项可在脚本 2、3 行更改，也可在 BoxJs 中更改。
-UnblockURLinWeChat = type=http-response, pattern=^https\:\/\/(weixin110\.qq|security.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\?, script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/asset/UnblockURLinWeChat.js, requires-body=true, max-size=-1, timeout=60
