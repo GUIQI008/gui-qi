@@ -3,7 +3,7 @@
 #!date=2024-1-27
 
 [MITM]
-hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,m.cloud.189.cn,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,static,pan.baidu.com,ndstatic.cdn.bcebos.com,staticsns.cdn.bcebos.com,issuecdn.baidupcs.com,update.pan.baidu.com,fc-video.cdn.bcebos.com,rp.hpplay.cn
+hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,images.pinduoduo.com,middle.yun.139.com,mcmm.caiyun.feixin.10086.cn,m.cloud.189.cn,imeres.baidu.com,mbd.baidu.com,mime.baidu.com,h2tcbox.baidu.com,wallpaper.soutushenqi.com,appconf.mail.163.com,mrp.mcloud.139.com,app.zhuanzhuan.com,static,pan.baidu.com,ndstatic.cdn.bcebos.com,staticsns.cdn.bcebos.com,issuecdn.baidupcs.com,update.pan.baidu.com,fc-video.cdn.bcebos.com,rp.hpplay.cn,ad.mcloud.139.com,api.cloud.189.cn
 
 
 [URL Rewrite]
@@ -21,6 +21,7 @@ hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,images.pin
 # > 中国电信
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ - reject
 # > 中国移动云盘
+^https?:\/\/ad\.mcloud\.139\.com\/advertapi\/adv-filter\/adv-filter\/AdInfoFilter\/getAdInfos$ url reject
 ^https:\/\/mrp\.mcloud\.139\.com\/mc\/mc-client-service\/openapi\/letter\/query - reject
 # > 次元城动漫
 ^http?:\/\/app\.95189371\.cn\/ciyuancheng\.php\/v\d\/top_notice\? - reject
@@ -43,6 +44,8 @@ hostname = %APPEND% open.e.kuaishou.cn,103.91.210.141,cds.wifi188.com,images.pin
 ^https?:\/\/update.pan.baidu.com\/statistics - reject
 ^https?:\/\/fc-video\.cdn\.bcebos\.com - reject
 ^https?:\/\/rp\.hpplay\.cn\/logouts - reject
+# > 天翼云盘
+^https?:\/\/api\.cloud\.189\.cn\/guns\/getOpenscreenBanners url reject
 [Map Local]
 # > 中国移动云盘
 ^https?:\/\/mcmm\.caiyun\.feixin\.10086\.cn:80\/mcmm\/api\/IAdvert data="https://raw.githubusercontent.com/mieqq/mieqq/master/reject-200.txt"
